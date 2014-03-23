@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "PCi Crypto Tipper",
+    "version": "0.0.1",
+    "author": "LEGRAND David",
+    "permissions": [
+        "tabs",
+        "webRequest",
+        "http://*.pcinpact.com/"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["http://www.pcinpact.com/news/*", "http://www.pcinpact.com/breve/*"],
+            "js": ["cs.js"],
+            "css": ["cs.css"],
+            "run_at": "document_end"
+        }
+    ],
+    "background": {
+        "scripts": ["background.js"],
+    },
+    "web_accessible_resources": ["bitcoin.jpg", "dogecoin.png"]
+}
