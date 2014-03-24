@@ -47,24 +47,24 @@ function createTipButtons(htmlElement) {
         return;
     var url = urlElement[0].getAttribute('href');
     var id = /\/inpactien\/([0-9]+)/.exec(url)[1];
-
-    var imgBTC = createClickableImg(id, "bitcoin");
-    var imgDoge = createClickableImg(id, "dogecoin");
+    var pseudo = urlElement[0].innerText.split(' Le ')[0];
+    var imgBTC = createClickableImg(id, "bitcoin", pseudo);
+    var imgDoge = createClickableImg(id, "dogecoin", pseudo);
 
     htmlElement.childNodes[1].appendChild(imgBTC);
     htmlElement.childNodes[1].appendChild(imgDoge);
 
 }
 
-function createClickableImg(id, type) {
+function createClickableImg(id, type, pseudo) {
     var tipObject = Constants.Bots.GetTipObjectByType(type);
 
     var imgElm = document.createElement('img');
     imgElm.setAttribute('data-id', id);
     imgElm.setAttribute('data-mode', type);
     imgElm.className = 'tipButton ';
-    imgElm.src = chrome.extension.getURL('img/'+type + ".png");
-    imgElm.title = "Récompensez cet INpactien via @" + tipObject.Bot;
+    imgElm.src = chrome.extension.getURL('img/' + type + ".png");
+    imgElm.title = "Récompensez " + pseudo + " via @" + tipObject.Bot;
 
     imgElm.width = "20";
     imgElm.onclick = function (e) {
@@ -98,12 +98,12 @@ function Tipper(elmt) {
 function getTwitterAccount(id, callback) {
     DoGet("http://www.pcinpact.com/inpactien/" + id, function () {
         if (this.status == 200) {
-            var query = this.response.querySelectorAll("#action_profil a"); 
+            var query = this.response.querySelectorAll("#action_profil a");
             if (query.length > 0) {
                 var urlForum = query[0].href;
                 extractFromForum(urlForum, callback);
             }
-          
+
         } else console.error("Une erreur est survenue lors de la récupération du profil du forum");
     });
 }
