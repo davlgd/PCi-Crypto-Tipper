@@ -35,9 +35,29 @@ chrome.runtime.onMessage.addListener(
             addButtons();
     });
 
+if (window.location.host == "forum.pcinpact.com")
+{
+	var comments = document.getElementsByClassName("author");
+	[].forEach.call(comments, createTipButtonsFofo);
+}
+
 function addButtons() {
-    var comments = document.getElementsByClassName("commentaire");
-    [].forEach.call(comments, createTipButtons);
+		var comments = document.getElementsByClassName("commentaire");
+		[].forEach.call(comments, createTipButtons);
+}
+
+function createTipButtonsFofo(htmlElement) {
+    var urlElement = htmlElement.querySelectorAll('a.name');
+    if (urlElement.length < 1)
+        return;
+    var url = urlElement[0].getAttribute('href');
+	var id = /http:\/\/forum\.pcinpact\.com\/user\/(\d*)-(.*)\//.exec(url)[1];
+    var pseudo = /http:\/\/forum\.pcinpact\.com\/user\/(\d*)-(.*)\//.exec(url)[2];
+	var imgBTC = createClickableImg(id, "bitcoin", pseudo);
+    var imgDoge = createClickableImg(id, "dogecoin", pseudo);
+
+    htmlElement.appendChild(imgBTC);
+    htmlElement.appendChild(imgDoge);
 }
 
 function createTipButtons(htmlElement) {

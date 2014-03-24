@@ -16,7 +16,7 @@
     ],
     "content_scripts": [
         {
-            "matches": ["http://www.pcinpact.com/news/*", "http://www.pcinpact.com/breve/*", "http://www.pcinpact.com/blog/*"],
+            "matches": ["http://www.pcinpact.com/news/*", "http://www.pcinpact.com/breve/*", "http://www.pcinpact.com/blog/*", "http://forum.pcinpact.com/topic/*"],
             "js": ["cs.js"],
             "css": ["cs.css"],
             "run_at": "document_end"
