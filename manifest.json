@@ -3,6 +3,12 @@
     "name": "PCi Crypto Tipper",
     "version": "0.0.1",
     "author": "LEGRAND David",
+	"description": "Extension permettant de rajouter des boutons de 'Tip' Twitter via Bitcoin / Dogecoin à PC INpact",
+	"icons": { "16": "img/logo-16.png",
+           "48": "img/logo-48.png",
+          "64": "img/logo-64.png",
+		  "128": "img/logo-128.png",
+		  "256": "img/logo-256.png"},
     "permissions": [
         "tabs",
         "webRequest",
@@ -19,5 +25,5 @@
     "background": {
         "scripts": ["background.js"]
     },
-    "web_accessible_resources": ["bitcoin.jpg", "dogecoin.png"]
+    "web_accessible_resources": ["img/bitcoin.png", "img/dogecoin.png"]
 }

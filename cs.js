@@ -7,14 +7,13 @@ chrome.runtime.onMessage.addListener(
 function addButtons() {
     var comments = document.getElementsByClassName("commentaire");
     for (i = 0; i < comments.length; i++) {
-        var url = comments[i].childNodes[3].childNodes[1].getAttribute("href");
-        var index = url.indexOf("inpactien/");
-        var id = url.substring(index + 10);
+        var id = comments[i].childNodes[3].childNodes[1].getAttribute("href").split("inpactien/")[1];
+		var pseudo = comments[i].childNodes[3].childNodes[1].innerText.split(" Le ")[0];
 
         var imgBTC = document.createElement("img");
         imgBTC.className = "tipButton btctip_" + id;
-        imgBTC.src = chrome.extension.getURL("bitcoin.jpg");
-        imgBTC.title = "Récompensez cet INpactien via @TipperCoin";
+        imgBTC.src = chrome.extension.getURL("img/bitcoin.png");
+        imgBTC.title = "Récompensez " + pseudo + " via @TipperCoin";
         imgBTC.style.cssText = "margin-top: 5px; margin-left: -5px; margin-right: 5px";
         imgBTC.width = "20";
         imgBTC.onclick = function (e) {
@@ -23,8 +22,8 @@ function addButtons() {
 
         var imgDoge = document.createElement("img");
         imgDoge.className = "tipButton dogetip_" + id;
-        imgDoge.src = chrome.extension.getURL("dogecoin.png");
-        imgDoge.title = "Récompensez cet INpactien via @TipDoge";
+        imgDoge.src = chrome.extension.getURL("img/dogecoin.png");
+        imgDoge.title = "Récompensez " + pseudo + " via @TipDoge";
         imgDoge.style.cssText = "margin-top: 5px";
         imgDoge.width = "20";
         imgDoge.onclick = function (e) {
@@ -69,7 +68,7 @@ function Tipper(elmt) {
 
             window.open(tweeetURL, "", "toolbar=0, status=0, width=600, height=257");
         }
-        else alert("L'utilisateur n'a pas lié son compte à un compte Twitter");
+        else alert("Cet INpactien n'a pas lié son compte à un compte Twitter");
     });
 }
 
