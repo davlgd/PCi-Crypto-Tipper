@@ -52,19 +52,19 @@ function Tipper(elmt) {
 
         case "tipButton dogetip":
             bot = "tipdoge"
-            tipDefaut = "133.7 dogecoins";
+            tipDefaut = "133.7 doge";
             break;
     }
 
     getTwitterAccount(id, function (result) {
         if (result != undefined && result != -1) {
 
-            tweeetURL = "https://twitter.com/intent/tweet?text=Hey%2C%20%40" + bot
-                + "%20envoie%20donc%20un%20tip%20de%20"
-                + tipDefaut
-                + "%20%C3%A0%20"
-                + result
-                + "&hashtags=CryptoTipPCi";
+            tweeetURL = "https://twitter.com/intent/tweet?text=Hey%20%40" + bot
+                + "%20tip%20donc%20"
+				+ tipDefaut
+				+ "%20%C3%A0%20"
+				+ result
+				+ "%20%23CryptoTipPCi";
 
             window.open(tweeetURL, "", "toolbar=0, status=0, width=600, height=257");
         }
