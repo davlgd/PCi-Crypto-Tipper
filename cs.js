@@ -60,7 +60,7 @@ function Tipper(elmt) {
         if (result != undefined && result != -1) {
 
             tweeetURL = "https://twitter.com/intent/tweet?text=Hey%2C%20%40" + bot
-                + "%20envoie%20donc%20"
+                + "%20envoie%20donc%20un%20tip%20de%20"
                 + tipDefaut
                 + "%20%C3%A0%20"
                 + result
