@@ -3,3 +3,12 @@
     margin-top: 5px;
     margin-right: 5px;
 }
+
+.commentaire_action {
+	float: right;
+	height: 18px;
+	position: relative;
+	text-align: right;
+	top: -17px!important;
+	width: 200px!important;
+}

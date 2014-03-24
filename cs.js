@@ -49,9 +49,9 @@ function createTipButtons(htmlElement) {
     var pseudo = urlElement[0].innerText.split(' Le ')[0];
     var imgBTC = createClickableImg(id, "bitcoin", pseudo);
     var imgDoge = createClickableImg(id, "dogecoin", pseudo);
-
-    htmlElement.childNodes[1].appendChild(imgBTC);
-    htmlElement.childNodes[1].appendChild(imgDoge);
+	
+    htmlElement.childNodes[3].childNodes[4].appendChild(imgBTC);
+    htmlElement.childNodes[3].childNodes[4].appendChild(imgDoge);
 }
 
 function createClickableImg(id, type, pseudo) {
@@ -60,7 +60,7 @@ function createClickableImg(id, type, pseudo) {
     var imgElm = document.createElement('img');
     imgElm.setAttribute('data-id', id);
     imgElm.setAttribute('data-mode', type);
-    imgElm.className = 'tipButton ';
+    imgElm.className = 'tipButton';
     imgElm.src = chrome.extension.getURL('img/' + type + ".png");
     imgElm.title = "Récompensez " + pseudo + " via @" + tipObject.Bot;
 
