@@ -29,23 +29,35 @@ var Constants = {
     }
 };
 
+// Voir pour améliorer le système de gestion de la fin de chargement de la page
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        if (request.greeting == "addButtons")
-            addButtons();
-    });
+        document.onreadystatechange = function () {
+    if (document.readyState == "complete") addButtons(request.greeting);
+    };
+});
 
-if (window.location.host == "forum.pcinpact.com")
-{
-	var comments = document.getElementsByClassName("author");
-	[].forEach.call(comments, createTipButtonsFofo);
+function addButtons(msg) {
+		var classToGet;
+        var callback;
+
+        switch(msg) {
+            case "commentsUpdate":
+                classToGet = "commentaire";
+                callback = createTipButtons;
+                break;
+
+            case "forumRead":
+                classToGet = "author";
+                callback = createTipButtonsFofo;
+                break;
+        }
+
+        var comments = document.getElementsByClassName(classToGet);
+        [].forEach.call(comments, callback);
 }
 
-function addButtons() {
-		var comments = document.getElementsByClassName("commentaire");
-		[].forEach.call(comments, createTipButtons);
-}
-
+// Voir pour factoriser ces deux fonctions
 function createTipButtonsFofo(htmlElement) {
 	var urlElement = htmlElement.querySelectorAll('a.name');
     if (urlElement.length < 1)
@@ -82,7 +94,7 @@ function createClickableImg(id, type, pseudo, source) {
 	imgElm.setAttribute('data-pseudo', pseudo);
     imgElm.setAttribute('data-mode', type);
 	imgElm.setAttribute('data-source', source);
-    imgElm.className = 'tipButton';
+    imgElm.className = 'tipButton PCiTip_' + source;
     imgElm.src = chrome.extension.getURL('img/' + type + ".png");
     imgElm.title = "Récompensez " + pseudo + " via @" + tipObject.Bot;
 
