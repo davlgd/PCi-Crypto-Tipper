@@ -5,8 +5,7 @@ var Constants = {
         Doge: "TipDoge",
         BitCoin: "TipperCoin",
         DogeTip: "133.7 doge",
-        BitTip: "0.001337 bitcoins",
-
+        BitTip: "0.0001337 bitcoins",
 
         GetTipObjectByType: function (type) {
             var name;
@@ -53,7 +52,6 @@ function createTipButtons(htmlElement) {
 
     htmlElement.childNodes[1].appendChild(imgBTC);
     htmlElement.childNodes[1].appendChild(imgDoge);
-
 }
 
 function createClickableImg(id, type, pseudo) {
@@ -82,7 +80,7 @@ function Tipper(elmt) {
         if (result != undefined && result != -1) {
 
             //utiliser encodeURI ici
-            var tweeetURL = "https://twitter.com/intent/tweet?text=Hey%2C%20%40" + tipObject.Bot
+            var tweeetURL = "https://twitter.com/intent/tweet?text=Hey%20%40" + tipObject.Bot
              + "%20tip%20donc%20"
              + tipObject.Amount
              + "%20%C3%A0%20"
@@ -91,7 +89,7 @@ function Tipper(elmt) {
 
             window.open(tweeetURL, "", "toolbar=0, status=0, width=600, height=257");
         }
-        else alert("L'utilisateur n'a pas lié son compte à un compte Twitter");
+        else alert("Cet INpactien n'a pas lié son compte à un compte Twitter");
     });
 }
 
@@ -103,7 +101,6 @@ function getTwitterAccount(id, callback) {
                 var urlForum = query[0].href;
                 extractFromForum(urlForum, callback);
             }
-
         } else console.error("Une erreur est survenue lors de la récupération du profil du forum");
     });
 }
