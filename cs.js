@@ -2,8 +2,8 @@ var Constants = {
     //Bots & Amounts
     Bots: {
 
-        Doge: "TipperCoin",
-        BitCoin: "TipDoge",
+        Doge: "TipDoge",
+        BitCoin: "TipperCoin",
         DogeTip: "133.7 dogecoins",
         BitTip: "0.001337 bitcoins",
 
@@ -63,9 +63,9 @@ function createClickableImg(id, type) {
     imgElm.setAttribute('data-id', id);
     imgElm.setAttribute('data-mode', type);
     imgElm.className = 'tipButton ';
-    imgElm.src = chrome.extension.getURL(type + ".png"); // Logo transparent ! (pas le cas de BTC)   
+    imgElm.src = chrome.extension.getURL('img/'+type + ".png"); // Logo transparent ! (pas le cas de BTC)   
     imgElm.title = "Récompensez cet INpactien via @" + tipObject.Bot;
-    imgElm.style.cssText = "margin-top: 5px; margin-left: -5px; margin-right: 5px";
+
     imgElm.width = "20";
     imgElm.onclick = function (e) {
         Tipper(this);
