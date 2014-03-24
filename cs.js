@@ -47,14 +47,14 @@ function addButtons() {
 }
 
 function createTipButtonsFofo(htmlElement) {
-    var urlElement = htmlElement.querySelectorAll('a.name');
+	var urlElement = htmlElement.querySelectorAll('a.name');
     if (urlElement.length < 1)
         return;
     var url = urlElement[0].getAttribute('href');
 	var id = /http:\/\/forum\.pcinpact\.com\/user\/(\d*)-(.*)\//.exec(url)[1];
     var pseudo = /http:\/\/forum\.pcinpact\.com\/user\/(\d*)-(.*)\//.exec(url)[2];
-	var imgBTC = createClickableImg(id, "bitcoin", pseudo);
-    var imgDoge = createClickableImg(id, "dogecoin", pseudo);
+	var imgBTC = createClickableImg(id, "bitcoin", pseudo, "forum");
+    var imgDoge = createClickableImg(id, "dogecoin", pseudo, "forum");
 
     htmlElement.appendChild(imgBTC);
     htmlElement.appendChild(imgDoge);
@@ -67,19 +67,21 @@ function createTipButtons(htmlElement) {
     var url = urlElement[0].getAttribute('href');
     var id = /\/inpactien\/([0-9]+)/.exec(url)[1];
     var pseudo = urlElement[0].innerText.split(' Le ')[0];
-    var imgBTC = createClickableImg(id, "bitcoin", pseudo);
-    var imgDoge = createClickableImg(id, "dogecoin", pseudo);
+    var imgBTC = createClickableImg(id, "bitcoin", pseudo, "site");
+    var imgDoge = createClickableImg(id, "dogecoin", pseudo, "site");
 	
     htmlElement.childNodes[3].childNodes[4].appendChild(imgBTC);
     htmlElement.childNodes[3].childNodes[4].appendChild(imgDoge);
 }
 
-function createClickableImg(id, type, pseudo) {
+function createClickableImg(id, type, pseudo, source) {
     var tipObject = Constants.Bots.GetTipObjectByType(type);
 
     var imgElm = document.createElement('img');
     imgElm.setAttribute('data-id', id);
+	imgElm.setAttribute('data-pseudo', pseudo);
     imgElm.setAttribute('data-mode', type);
+	imgElm.setAttribute('data-source', source);
     imgElm.className = 'tipButton';
     imgElm.src = chrome.extension.getURL('img/' + type + ".png");
     imgElm.title = "Récompensez " + pseudo + " via @" + tipObject.Bot;
@@ -94,9 +96,11 @@ function createClickableImg(id, type, pseudo) {
 function Tipper(elmt) {
     var mode = elmt.getAttribute('data-mode');
     var id = elmt.getAttribute('data-id');
-
+	var pseudo = elmt.getAttribute('data-pseudo');
+	var source = elmt.getAttribute('data-source');
+	
     var tipObject = Constants.Bots.GetTipObjectByType(mode);
-    getTwitterAccount(id, function (result) {
+	callback = function (result) {
         if (result != undefined && result != -1) {
 
             //utiliser encodeURI ici
@@ -110,7 +114,10 @@ function Tipper(elmt) {
             window.open(tweeetURL, "", "toolbar=0, status=0, width=600, height=257");
         }
         else alert("Cet INpactien n'a pas lié son compte à un compte Twitter");
-    });
+    };
+	
+    if (source == "site") getTwitterAccount(id, callback);
+	else extractFromForum("http://forum.pcinpact.com/user/" + id + "-" + pseudo + "/", callback);
 }
 
 function getTwitterAccount(id, callback) {
