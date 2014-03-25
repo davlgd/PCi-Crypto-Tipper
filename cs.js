@@ -29,13 +29,12 @@ var Constants = {
     }
 };
 
-// Voir pour améliorer le système de gestion de la fin de chargement de la page
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        document.onreadystatechange = function () {
-    if (document.readyState == "complete") addButtons(request.greeting);
-    };
-});
+        addButtons(request.greeting);
+    });
+
+if (window.location.host == "forum.pcinpact.com") addButtons("forumRead");
 
 function addButtons(msg) {
 		var classToGet;
