@@ -1,9 +1,9 @@
 {
     "manifest_version": 2,
-    "name": "PCi Crypto Tipper",
-    "version": "0.0.2.0",
+    "name": "NXi Crypto Tipper",
+    "version": "0.0.2.1",
     "author": "LEGRAND David",
-	"description": "Extension permettant de rajouter des boutons de 'Tip' Twitter via Bitcoin / Dogecoin à PC INpact et son forum",
+	"description": "Extension permettant de rajouter des boutons de 'Tip' Twitter via Bitcoin / Dogecoin à Next INpact et son forum",
 	"icons": { "16": "img/logo-16.png",
            "48": "img/logo-48.png",
           "64": "img/logo-64.png",
@@ -12,11 +12,11 @@
     "permissions": [
         "tabs",
         "webRequest",
-        "http://*.pcinpact.com/"
+        "http://*.nextinpact.com/"
     ],
     "content_scripts": [
         {
-            "matches": ["http://www.pcinpact.com/news/*", "http://www.pcinpact.com/breve/*", "http://www.pcinpact.com/blog/*", "http://forum.pcinpact.com/topic/*"],
+            "matches": ["http://www.nextinpact.com/news/*", "http://www.nextinpact.com/breve/*", "http://www.nextinpact.com/blog/*", "http://forum.nextinpact.com/topic/*"],
             "js": ["cs.js"],
             "css": ["cs.css"],
             "run_at": "document_end"
